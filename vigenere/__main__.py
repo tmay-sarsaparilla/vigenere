@@ -6,6 +6,7 @@ from .encrypt import process_text
 
 
 def main(args):
+    """Parse input arguments and execute text processing"""
     parser = argparse.ArgumentParser(description="Vigenère encryptor", usage="Used to encrypt and decrypt messages")
     parser.add_argument("-d", "--decrypt", action="store_true", help="Decryption option")
     parser.add_argument("-text", type=str, required=True, help="Text to be processed by the encryptor")
