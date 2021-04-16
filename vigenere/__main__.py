@@ -9,7 +9,9 @@ def main(args):
     parser = argparse.ArgumentParser(description="Vigenère encryptor", usage="Used to encrypt and decrypt messages")
     parser.add_argument("-d", "--decrypt", action="store_true", help="Decryption option")
     parser.add_argument("-text", type=str, required=True, help="Text to be processed by the encryptor")
-    parser.add_argument("-keywords", type=str, required=True, help="Keywords to be used by the encryptor")
+    parser.add_argument(
+        "-keywords", type=str, required=True,
+        help="Keywords to be used by the encryptor. To provide multiple keywords separate them by a space")
     parser.add_argument(
         "-step", type=int, default=0, required=False,
         help="How many steps the encryptor should take each keyword cycle")
