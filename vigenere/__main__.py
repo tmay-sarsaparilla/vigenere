@@ -2,7 +2,7 @@
 
 import sys
 import argparse
-from encrypt import process_text
+from .encrypt import process_text
 
 
 def main(args):

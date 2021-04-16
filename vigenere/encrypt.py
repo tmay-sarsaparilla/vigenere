@@ -1,7 +1,18 @@
 """Module for encryption functions"""
 
 from numpy import floor
-from square import square, get_letter_from_index, get_index_from_letter
+from string import punctuation
+from .square import square, get_letter_from_index, get_index_from_letter
+
+
+def cleanse_input(input_string):
+    """Tidy up a given input string"""
+    input_string = input_string.strip().upper()
+
+    for p in punctuation:
+        input_string = input_string.replace(p, "")
+
+    return input_string
 
 
 def encrypt_letter(letter_index, keyword_letter_index):
@@ -26,8 +37,8 @@ def process_text(input_text, keywords, step_size=0, decrypt=False):
 
     If encrypt is True, encrypt the text, otherwise decrypt
     """
-    input_text = input_text.upper().replace(" ", "")
-    keywords = keywords.strip().upper().split(" ")
+    input_text = cleanse_input(input_text).replace(" ", "")
+    keywords = cleanse_input(keywords).split(" ")
 
     output_text = ""
 
@@ -51,5 +62,7 @@ def process_text(input_text, keywords, step_size=0, decrypt=False):
             letter_index = get_index_from_letter(letter=letter)
 
         output_text += letter
+
+    output_text = ' '.join(output_text[i:i+5] for i in range(0, len(output_text), 5))
 
     return output_text
