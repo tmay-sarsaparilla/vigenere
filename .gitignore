@@ -72,3 +72,6 @@ fabric.properties
 
 /.idea
 __pycache__
+dist
+vigenere.egg-info
+venv
