@@ -32,27 +32,20 @@ def process_text(input_text, keywords, encrypt=True):
     keywords = keywords.strip().upper().split(" ")
 
     output_text = ""
-    num_keywords = len(keywords)
-    keywords_count = 0
 
-    for keyword in keywords:
-        keywords_count += 1
-        keyword_length = len(keyword)
-
-        for i in range(0, len(input_text)):
-            letter = input_text[i]
-            keyword_letter = keyword[i % keyword_length]
+    for i in range(0, len(input_text)):
+        letter = input_text[i]
+        for keyword in keywords:
+            keyword_letter = keyword[i % len(keyword)]
 
             if encrypt:
                 output_letter = encrypt_letter(letter=letter, keyword_letter=keyword_letter)
             else:
                 output_letter = decrypt_letter(letter=letter, keyword_letter=keyword_letter)
 
-            output_text += output_letter
+            letter = output_letter
 
-        input_text = output_text
-        if keywords_count < num_keywords:
-            output_text = ""
+        output_text += letter
 
     return output_text
 
@@ -61,8 +54,8 @@ if __name__ == "__main__":
     print(encrypt_letter('T', 'E'))
     print(decrypt_letter('X', 'E'))
 
-    test_text = process_text("this is a secret message which only i can read", "sixteenth april")
+    test_text = process_text("ATTACKATDAWN", "GO CAT")
     print(test_text)
 
-    test_plain_text = process_text("LEWTXWCCTFZQDYTFAYGXTPDOFHJUOQVTIMIHK", "sixteenth april", False)
+    test_plain_text = process_text("IHSQIRIHCQCU", "GO CAT", False)
     print(test_plain_text)
