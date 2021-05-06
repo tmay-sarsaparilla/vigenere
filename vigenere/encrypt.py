@@ -35,7 +35,7 @@ def decrypt_letter(letter_index, keyword_letter_index):
 def process_text(input_text, keywords, step_size=0, decrypt=False):
     """Process a given input text using a given set of keywords
 
-    If encrypt is True, encrypt the text, otherwise decrypt
+    If decrypt is True, decrypt the text, otherwise encrypt
     """
     input_text = cleanse_input(input_text).replace(" ", "")
     keywords = cleanse_input(keywords).split(" ")
@@ -51,7 +51,7 @@ def process_text(input_text, keywords, step_size=0, decrypt=False):
             keyword_letter = keyword[i % keyword_length]
             # Increase the keyword letter index by the number of cycles multiplied by the step size
             # This causes the encryption to jump every keyword cycle
-            keyword_letter_index = get_index_from_letter(letter=keyword_letter) + (cycles * step_size)
+            keyword_letter_index = (get_index_from_letter(letter=keyword_letter) + (cycles * step_size)) % 26
 
             if decrypt:
                 output_letter = decrypt_letter(letter_index=letter_index, keyword_letter_index=keyword_letter_index)
