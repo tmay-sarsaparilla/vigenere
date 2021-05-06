@@ -24,7 +24,7 @@ def encrypt_letter(letter_index, keyword_letter_index):
 def decrypt_letter(letter_index, keyword_letter_index):
     """Decrypt a given encrypted-text letter using a given keyword letter"""
 
-    row = square[keyword_letter_index: keyword_letter_index + 1, :].tolist()[0]  # Get row of the keyword letter
+    (row,) = square[keyword_letter_index: keyword_letter_index + 1, :].tolist()  # Get row of the keyword letter
 
     return row.index(letter_index)  # Find column of the given encrypted letter
 
