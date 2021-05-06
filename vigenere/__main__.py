@@ -20,7 +20,8 @@ def main(args):
 
     processed = process_text(input_text=args.text, keywords=args.keywords, step_size=args.step, decrypt=args.decrypt)
 
-    print(processed)
+    print(f"Input text: {args.text}")
+    print(f"Output text: {processed}")
 
 
 if __name__ == "__main__":
