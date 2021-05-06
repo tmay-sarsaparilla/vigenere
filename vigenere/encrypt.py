@@ -18,18 +18,15 @@ def cleanse_input(input_string):
 def encrypt_letter(letter_index, keyword_letter_index):
     """Encrypt a plain-text letter using a given keyword letter index"""
 
-    square_output = square[keyword_letter_index, letter_index]  # Lookup the encrypted letter index
-
-    return get_letter_from_index(square_output)
+    return square[keyword_letter_index, letter_index]  # Lookup the encrypted letter index
 
 
 def decrypt_letter(letter_index, keyword_letter_index):
     """Decrypt a given encrypted-text letter using a given keyword letter"""
 
     row = square[keyword_letter_index: keyword_letter_index + 1, :].tolist()[0]  # Get row of the keyword letter
-    square_output = row.index(letter_index)  # Find column of the given encrypted letter
 
-    return get_letter_from_index(square_output)
+    return row.index(letter_index)  # Find column of the given encrypted letter
 
 
 def process_text(input_text, keywords, step_size=0, decrypt=False):
@@ -54,14 +51,11 @@ def process_text(input_text, keywords, step_size=0, decrypt=False):
             keyword_letter_index = (get_index_from_letter(letter=keyword_letter) + (cycles * step_size)) % 26
 
             if decrypt:
-                output_letter = decrypt_letter(letter_index=letter_index, keyword_letter_index=keyword_letter_index)
+                letter_index = decrypt_letter(letter_index=letter_index, keyword_letter_index=keyword_letter_index)
             else:
-                output_letter = encrypt_letter(letter_index=letter_index, keyword_letter_index=keyword_letter_index)
+                letter_index = encrypt_letter(letter_index=letter_index, keyword_letter_index=keyword_letter_index)
 
-            letter = output_letter
-            letter_index = get_index_from_letter(letter=letter)
-
-        output_text += letter
+        output_text += get_letter_from_index(letter_index)
 
     output_text = ' '.join(output_text[i:i+5] for i in range(0, len(output_text), 5))
 
